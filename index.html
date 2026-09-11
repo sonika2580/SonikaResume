@@ -1,0 +1,584 @@
+<title>Sonika Shrestha</title>
+<style>
+  :root {
+    --paper: #EEF0EA;
+    --paper-raised: #E3E6DC;
+    --ink: #172230;
+    --ink-soft: #4B586A;
+    --ink-faint: #7C8798;
+    --accent: #AD6A2A;
+    --accent-strong: #8A5320;
+    --accent-tint: rgba(173, 106, 42, 0.11);
+    --line: #CBD0C2;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #121821;
+      --paper-raised: #1A232E;
+      --ink: #E7E9E1;
+      --ink-soft: #A7B0BC;
+      --ink-faint: #76818F;
+      --accent: #E3A85B;
+      --accent-strong: #F0BE80;
+      --accent-tint: rgba(227, 168, 91, 0.13);
+      --line: #2A3542;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #121821;
+    --paper-raised: #1A232E;
+    --ink: #E7E9E1;
+    --ink-soft: #A7B0BC;
+    --ink-faint: #76818F;
+    --accent: #E3A85B;
+    --accent-strong: #F0BE80;
+    --accent-tint: rgba(227, 168, 91, 0.13);
+    --line: #2A3542;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', -apple-system, 'Segoe UI', sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    padding: 0 20px;
+  }
+
+  a { color: var(--accent-strong); }
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  h1, h2, h3 {
+    font-family: 'IBM Plex Serif', Georgia, 'Times New Roman', serif;
+    text-wrap: balance;
+    margin: 0;
+    color: var(--ink);
+  }
+
+  .mono {
+    font-family: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace;
+  }
+
+  .page {
+    max-width: 760px;
+    margin: 0 auto;
+    padding-block: 3rem 4rem;
+  }
+
+  /* ---- header ---- */
+  .record {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--accent-strong);
+    margin: 0;
+  }
+  .record h1 {
+    font-size: clamp(2.1rem, 5vw, 2.9rem);
+    font-weight: 600;
+  }
+  .role {
+    margin: 0;
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+  }
+  .contact {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 0.9rem;
+    margin: 0.3rem 0 0;
+    padding: 0;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+  }
+  .contact li::after {
+    content: "";
+  }
+  .contact a { color: var(--ink-soft); text-decoration-color: var(--line); }
+  .contact a:hover { color: var(--accent-strong); text-decoration-color: var(--accent); }
+
+  .print-btn {
+    align-self: flex-start;
+    margin-top: 0.4rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.03em;
+    background: transparent;
+    color: var(--accent-strong);
+    border: 1px solid var(--accent);
+    border-radius: 3px;
+    padding: 0.45rem 0.8rem;
+    cursor: pointer;
+  }
+  .print-btn:hover { background: var(--accent-tint); }
+
+  /* ---- nav / table of contents ---- */
+  .toc {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem 1.1rem;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid var(--line);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+  }
+  .toc a {
+    color: var(--ink-faint);
+    text-decoration: none;
+  }
+  .toc a:hover { color: var(--accent-strong); }
+
+  /* ---- sections ---- */
+  .section {
+    padding: 2.2rem 0;
+    border-bottom: 1px solid var(--line);
+    scroll-margin-top: 1.5rem;
+  }
+  .section:last-of-type { border-bottom: none; }
+  .label {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.03em;
+    color: var(--accent-strong);
+    margin-bottom: 1.1rem;
+  }
+  .prose {
+    max-width: 66ch;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  /* ---- skills ---- */
+  .skill-groups {
+    display: grid;
+    gap: 1.3rem;
+  }
+  .skill-group h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--ink-faint);
+    text-transform: lowercase;
+    margin-bottom: 0.55rem;
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .chip {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--ink);
+    background: var(--accent-tint);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 0.22rem 0.55rem;
+  }
+
+  /* ---- rows (education / experience / projects / research) ---- */
+  .rows {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+  }
+  .row {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 0.4rem 1.6rem;
+  }
+  .row-meta .dates {
+    font-family: 'IBM Plex Mono', monospace;
+    font-variant-numeric: tabular-nums;
+    font-size: 0.78rem;
+    color: var(--ink-faint);
+  }
+  .row-body h3 {
+    font-size: 1.02rem;
+    font-weight: 600;
+  }
+  .row-body .org {
+    margin: 0.15rem 0 0.6rem;
+    font-size: 0.92rem;
+    color: var(--accent-strong);
+  }
+  .bullets {
+    margin: 0;
+    padding-left: 1.1rem;
+    color: var(--ink-soft);
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  .bullets li { font-size: 0.94rem; }
+
+  @media (max-width: 560px) {
+    .row { grid-template-columns: 1fr; }
+    .row-meta { order: -1; }
+  }
+
+  /* ---- footer ---- */
+  .foot {
+    margin-top: 2.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.6rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--ink-faint);
+  }
+  .foot a { color: var(--ink-faint); }
+  .foot a:hover { color: var(--accent-strong); }
+
+  @media print {
+    body { background: #fff; color: #000; padding: 0; }
+    .toc, .print-btn { display: none; }
+    .page { max-width: 100%; padding: 0.4in; }
+    a { color: #000; text-decoration: none; }
+    .section, .record { border-color: #ccc; }
+  }
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<div class="page">
+
+  <header class="record">
+    <p class="eyebrow">resume · data engineering</p>
+    <h1>Sonika Shrestha</h1>
+    <p class="role">Data Engineer / Data Scientist</p>
+    <ul class="contact">
+      <li>Mankato, MN 56001</li>
+      <li><a href="tel:5077599987">507-759-9987</a></li>
+      <li><a href="mailto:Sonikashrestha1997@gmail.com">Sonikashrestha1997@gmail.com</a></li>
+      <li><a href="https://www.linkedin.com/in/sonika-shrestha/" target="_blank" rel="noopener">linkedin.com/in/sonika-shrestha</a></li>
+      <li><a href="https://github.com/sonika2580" target="_blank" rel="noopener">github.com/sonika2580</a></li>
+    </ul>
+    <button id="printBtn" class="print-btn" type="button">Print / Save as PDF</button>
+  </header>
+
+  <nav class="toc" aria-label="Sections">
+    <a href="#summary">resume.summary</a>
+    <a href="#skills">resume.skills</a>
+    <a href="#education">resume.education</a>
+    <a href="#experience">resume.experience</a>
+    <a href="#certifications">resume.certifications</a>
+    <a href="#projects">resume.projects</a>
+    <a href="#research">resume.research</a>
+  </nav>
+
+  <main>
+
+    <section id="summary" class="section">
+      <span class="label">resume.summary</span>
+      <p class="prose">Results-driven data professional with a proven ability to architect, develop, and optimize data solutions that drive business success. Armed with a master's degree in data science and a background spanning data engineering, data science, and project management, I bring a blend of technical expertise and strategic vision. Proficient in designing and implementing ETL/ELT processes, integrating data from disparate sources, and leveraging advanced analytics to uncover valuable insights. Adept at collaborating with cross-functional teams to translate business needs into actionable data strategies, with a track record of delivering impactful projects and driving data-driven decision-making.</p>
+    </section>
+
+    <section id="skills" class="section">
+      <span class="label">resume.skills</span>
+      <div class="skill-groups">
+        <div class="skill-group">
+          <h3>languages &amp; querying</h3>
+          <div class="chips">
+            <span class="chip">Python</span><span class="chip">SQL</span><span class="chip">Scala</span><span class="chip">R</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>data platforms &amp; warehousing</h3>
+          <div class="chips">
+            <span class="chip">Data Lake House</span><span class="chip">Data Warehousing</span><span class="chip">Snowflake</span><span class="chip">Hadoop</span><span class="chip">Hive</span><span class="chip">Spark</span><span class="chip">ETL/ELT</span><span class="chip">Data Stage</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>databases</h3>
+          <div class="chips">
+            <span class="chip">MongoDB</span><span class="chip">Oracle</span><span class="chip">SQL Server</span><span class="chip">MySQL</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>cloud &amp; infrastructure</h3>
+          <div class="chips">
+            <span class="chip">AWS</span><span class="chip">Azure</span><span class="chip">IBM Cloud</span><span class="chip">Docker</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>analytics, bi &amp; ml</h3>
+          <div class="chips">
+            <span class="chip">Tableau</span><span class="chip">Power BI</span><span class="chip">Matplotlib</span><span class="chip">SSRS</span><span class="chip">Data Analytics</span><span class="chip">Deep Learning</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>tools</h3>
+          <div class="chips">
+            <span class="chip">JIRA</span><span class="chip">Visio</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="education" class="section">
+      <span class="label">resume.education</span>
+      <div class="rows">
+        <div class="row">
+          <div class="row-meta"><span class="dates">Jan 2022 – Dec 2023</span></div>
+          <div class="row-body">
+            <h3>MS in Data Science</h3>
+            <p class="org">Minnesota State University, Mankato MN</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="row-meta"><span class="dates">Aug 2016 – Dec 2020</span></div>
+          <div class="row-body">
+            <h3>BS in Management Information Systems</h3>
+            <p class="org">Minnesota State University, Mankato MN</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" class="section">
+      <span class="label">resume.experience</span>
+      <div class="rows">
+
+        <div class="row">
+          <div class="row-meta"><span class="dates">Sep 2023 – Present</span></div>
+          <div class="row-body">
+            <h3>Data Engineer</h3>
+            <p class="org">Christensen Farms, New Ulm, MN (Hybrid)</p>
+            <ul class="bullets">
+              <li>Designed, developed, and maintained ETLs, data pipelines, and ELTs, ensuring seamless data integration from diverse source systems, including structured and unstructured data.</li>
+              <li>Engineered schedules and orchestrations for efficient batch and near real-time data loads into the enterprise data lake house.</li>
+              <li>Proactively identified and resolved data performance issues associated with development, querying, and combination of large data sets from various sources.</li>
+              <li>Collaborated closely with business users to comprehend data definitions and analytics use cases, contributing to data governance frameworks and detailed data requirements.</li>
+              <li>Supported reports, dashboards, and visualizations using Power BI, providing actionable insights to stakeholders.</li>
+              <li>Provided 2nd level employee support for decision science services, ensuring smooth operation of data-driven processes.</li>
+              <li>Researched cutting-edge tools, disciplines, and industry trends, offering recommendations for team and company improvements.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="row-meta"><span class="dates">Jun 2023 – Aug 2023</span></div>
+          <div class="row-body">
+            <h3>Data Scientist</h3>
+            <p class="org">Takeo.AI, New York (Remote)</p>
+            <ul class="bullets">
+              <li>Designed, developed, and maintained ETLs, data pipelines, and ELTs, ensuring seamless data integration from diverse source systems, including structured and unstructured data.</li>
+              <li>Engineered schedules and orchestrations for efficient batch and near real-time data loads into the enterprise data lake house.</li>
+              <li>Proactively identified and resolved data performance issues associated with development, querying, and combination of large data sets from various sources.</li>
+              <li>Collaborated closely with business users to comprehend data definitions and analytics use cases, contributing to data governance frameworks and detailed data requirements.</li>
+              <li>Supported reports, dashboards, and visualizations using Power BI, providing actionable insights to stakeholders.</li>
+              <li>Provided 2nd level employee support for decision science services, ensuring smooth operation of data-driven processes.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="row-meta"><span class="dates">Sep 2022 – May 2023</span></div>
+          <div class="row-body">
+            <h3>Graduate Assistant</h3>
+            <p class="org">Minnesota State University, Mankato</p>
+            <ul class="bullets">
+              <li>Utilized data analysis techniques to assess students' performance and progress in the D2L platform, identifying trends and areas for improvement.</li>
+              <li>Collected, organized, and analyzed student feedback each semester, using insights to tailor curriculum content and delivery methods.</li>
+              <li>Collaborated with faculty and peers to propose strategies for curriculum enhancement, ensuring relevance to industry trends.</li>
+              <li>Contributed to new events and activities enhancing students' professional development, networking, and business etiquette skills.</li>
+              <li>Offered input on curriculum related to professional etiquette, resume building, cover letter writing, and LinkedIn optimization.</li>
+              <li>Used Excel and other tools to visualize and present insights, facilitating informed curriculum decisions.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="row-meta"><span class="dates">Mar 2021 – May 2022</span></div>
+          <div class="row-body">
+            <h3>Content Creator</h3>
+            <p class="org">Magic Expedition Tours &amp; Travel</p>
+            <ul class="bullets">
+              <li>Crafted travel blogs, articles, and social media content, enhancing the company's online presence.</li>
+              <li>Curated destination guides and travel tips aligned with brand voice and industry trends.</li>
+              <li>Collaborated with the marketing team to optimize content for SEO and audience engagement.</li>
+              <li>Monitored performance metrics, driving increased user interactions and website traffic.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="row-meta"><span class="dates">Dec 2019 – Mar 2020</span></div>
+          <div class="row-body">
+            <h3>Business System Analyst Intern</h3>
+            <p class="org">Takeo.AI</p>
+            <ul class="bullets">
+              <li>Crafted System Vision Documents outlining project objectives, scope, and requirements to align stakeholders and developers.</li>
+              <li>Designed Entity-Relationship Diagrams, translating business processes into structured visual representations.</li>
+              <li>Developed and maintained databases, ensuring accurate data storage and retrieval for decision-making.</li>
+              <li>Facilitated communication between stakeholders and developers, bridging technical and business perspectives.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="row-meta"><span class="dates">Jan 2017 – May 2019</span></div>
+          <div class="row-body">
+            <h3>Student Manager</h3>
+            <p class="org">Sodexo</p>
+            <ul class="bullets">
+              <li>Managed breaks and workflow, ensuring team efficiency during peak hours.</li>
+              <li>Handled point-of-sale operations, maintaining accurate and organized transactions.</li>
+              <li>Managed inventory, optimizing stock levels and minimizing wastage.</li>
+              <li>Developed and maintained employee schedules, aligning staffing with business demands.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="certifications" class="section">
+      <span class="label">resume.certifications</span>
+      <div class="rows">
+        <div class="row">
+          <div class="row-meta"><span class="dates">Jun 2023 – Aug 2023</span></div>
+          <div class="row-body">
+            <h3>Data Engineering Bootcamp</h3>
+            <p class="org">Takeo.AI, New York (Remote)</p>
+            <ul class="bullets">
+              <li>Completed an intensive Data Engineering Boot Camp across a diverse range of cutting-edge tools and technologies.</li>
+              <li>Gained hands-on expertise in Hadoop, Spark, and Hive for big data processing.</li>
+              <li>Used AWS services including IAM, Glue ETL, Lambda, Redshift, and S3 to build scalable data solutions.</li>
+              <li>Used Azure services including Resource, Containers, SQL, Databricks, Data Factory, and Synapse for cloud-based pipelines and analytics.</li>
+              <li>Applied cloud data warehousing with Snowflake for efficient storage, querying, and reporting.</li>
+              <li>Used MongoDB to design and manage NoSQL databases for flexible, schema-less storage.</li>
+              <li>Containerized applications and services with Docker for consistent deployment across environments.</li>
+              <li>Worked with Kafka for real-time data streaming and processing.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <span class="label">resume.projects</span>
+      <div class="rows">
+
+        <div class="row">
+          <div class="row-meta"><span class="dates">Jun 2023 – Aug 2023</span></div>
+          <div class="row-body">
+            <h3>Diagnosis of Gestational Disease</h3>
+            <p class="org">Minnesota State University, Mankato</p>
+            <ul class="bullets">
+              <li>Used R for exploratory data analysis, uncovering correlations and outliers within medical datasets.</li>
+              <li>Standardized and preprocessed data for consistent, reliable variable comparison.</li>
+              <li>Identified relationships between medical parameters through correlation tests, highlighting potential risk factors.</li>
+              <li>Built prediction models using logistic regression, decision trees, and random forests.</li>
+              <li>Evaluated models with ROC analysis, Residual Deviance, AIC, Accuracy, Precision, Recall, and F1-Score, refining iteratively.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="row-meta"><span class="dates">Jan 2023 – May 2023</span></div>
+          <div class="row-body">
+            <h3>Recommendation System for Walmart</h3>
+            <p class="org">Minnesota State University, Mankato</p>
+            <ul class="bullets">
+              <li>Led a team of four to devise a scalable data processing platform for 1TB datasets, centered on Walmart.</li>
+              <li>Used Hadoop, Spark, Hive, Python, and Tableau to build an efficient end-to-end data pipeline.</li>
+              <li>Performed ETL/ELT operations and structured final data for reporting and analysis.</li>
+              <li>Improved data retrieval efficiency with partitioning and bucketing, accelerating query performance.</li>
+              <li>Integrated real-time data streams using Flume Sink for continuous, up-to-date analysis.</li>
+              <li>Transformed complex datasets into actionable insights using Tableau for data-driven decisions.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="row-meta"><span class="dates">Jan 2023 – May 2023</span></div>
+          <div class="row-body">
+            <h3>Voice AI for Windows</h3>
+            <p class="org">Minnesota State University, Mankato</p>
+            <ul class="bullets">
+              <li>Used Python's Speech Recognition and pyttsx3 libraries for seamless voice interaction.</li>
+              <li>Built a user-friendly GUI with Tkinter for initiating voice commands and receiving responses.</li>
+              <li>Implemented multi-threading for a responsive experience during voice recognition and execution.</li>
+              <li>Integrated a large language model to enhance response diversity and engagement.</li>
+              <li>Engineered accurate command parsing, gracefully handling unclear input and error scenarios.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="row-meta"><span class="dates">Jan 2022 – May 2022</span></div>
+          <div class="row-body">
+            <h3>COVID-19 Vaccination Rate Prediction</h3>
+            <p class="org">Minnesota State University, Mankato</p>
+            <ul class="bullets">
+              <li>Used Python for COVID-19 vaccination data preprocessing and analysis, uncovering trends and influencers.</li>
+              <li>Used Excel for informative visualization, creating charts to aid insight extraction.</li>
+              <li>Forecasted vaccine distribution with ARIMA models, integrating historical data and external factors.</li>
+              <li>Collaborated with healthcare experts for accurate predictions, aligning the model with medical understanding.</li>
+              <li>Presented visualizations and reports to stakeholders, updating the model as data changed.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="research" class="section">
+      <span class="label">resume.research</span>
+      <div class="rows">
+        <div class="row">
+          <div class="row-meta"><span class="dates">Aug 2022 – Dec 2022</span></div>
+          <div class="row-body">
+            <h3>Detection of SLE using Transfer Learning and GANs</h3>
+            <p class="org">Minnesota State University, Mankato</p>
+            <ul class="bullets">
+              <li>Managed the full project lifecycle in Python, including data preprocessing, model training, and evaluation.</li>
+              <li>Used TensorFlow and PyTorch to build CNNs for feature extraction and classification of facial images.</li>
+              <li>Applied transfer learning with pre-trained models (VGG16, ResNet) to improve training efficiency and knowledge transfer.</li>
+              <li>Incorporated GANs to synthesize realistic facial rash images, augmenting the dataset and improving generalization.</li>
+              <li>Applied OpenCV for image preprocessing, resizing, normalization, and augmentation, and used Beautiful Soup for web scraping to expand training data.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="foot">
+    <span>Sonika Shrestha</span>
+    <span>
+      <a href="mailto:Sonikashrestha1997@gmail.com">email</a> ·
+      <a href="https://www.linkedin.com/in/sonika-shrestha/" target="_blank" rel="noopener">linkedin</a> ·
+      <a href="https://github.com/sonika2580" target="_blank" rel="noopener">github</a>
+    </span>
+  </footer>
+
+</div>
+
+<script>
+  document.getElementById('printBtn').addEventListener('click', function () {
+    window.print();
+  });
+</script>
